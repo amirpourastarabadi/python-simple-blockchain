@@ -1,6 +1,5 @@
 import hashlib
 import json
-import sys
 from time import time
 from urllib.parse import urlparse
 
