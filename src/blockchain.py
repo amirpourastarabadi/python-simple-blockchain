@@ -2,10 +2,12 @@ import hashlib
 import json
 import sys
 from time import time
+from urllib.parse import urlparse
 
 class BlockChain:
     def __init__(self):
         self.chain = []
+        self.nodes = set()
         self.current_transactions = []
 
         # create genesis block
@@ -26,6 +28,11 @@ class BlockChain:
         self.chain.append(block)
 
         return block
+    
+    def register_node(self, address):
+        parsed_url = urlparse(address)
+
+        self.nodes.add(parsed_url.netloc)
 
     def full_mempool(self):
         self.last_block['transactions'] = self.current_transactions

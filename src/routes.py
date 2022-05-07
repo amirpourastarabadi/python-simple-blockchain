@@ -44,3 +44,23 @@ def full_chain():
     }
 
     return jsonify(chain), 200
+
+
+@app.route('/node/register', methods=['POST'])
+def node_register():
+    values = request.get_json()
+    registered_node = values['node']
+    blockchain.register_node(registered_node)
+
+    return jsonify({'message': f'node {registered_node} registerd'}), 201
+
+
+@app.route('/node/resolve')
+def node_resolve():
+    return "it will resolve chain conflict"
+
+
+@app.route('/nodes')
+def nodes():
+    print(blockchain.nodes)
+    return jsonify({'nodes': list(blockchain.nodes)})
