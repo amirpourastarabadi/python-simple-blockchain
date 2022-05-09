@@ -1,5 +1,6 @@
 import hashlib
 import json
+from operator import ne
 from time import time
 from urllib.parse import urlparse
 
@@ -12,14 +13,14 @@ class BlockChain:
         # create genesis block
         self.new_block()
 
-    def new_block(self, nonce=None, previus_hash=None):
+    def new_block(self, nonce=None, previous_hash=None):
     
         block = {
             'index': len(self.chain) + 1,
             'timestamp': time(),
             'transactions' : [],
             'nonce': nonce,
-            'previus_hash': previus_hash,
+            'previous_hash': previous_hash,
         }
 
         self.current_transactions = []
@@ -43,6 +44,42 @@ class BlockChain:
 
         return self.last_block['index']
 
+    def validate_chain(self, chain):
+        last_block = chain[0]
+        index = 1
+
+        while index < len(chain):
+            block = chain[index]
+            
+            if block['previous_hash'] != self.hash(last_block):
+                return False
+            
+            last_block = block
+            index += 1
+        
+        return True
+
+    def resolve_conflicts(self):
+        new_chain = None
+        max_length = self.chain
+
+        for node in self.nodes:
+            response = requests.get(f"http://{node}/chain")
+            if response.status_code == 200:
+                neighbour_chain = response.json()['chain']
+                node_chain_length = len(neighbour_chain)
+
+                if node_chain_length > max_length and self.validate_chain(neighbour_chain):
+                    new_chain = neighbour_chain
+                    max_length = node_chain_length
+        
+        if new_chain:
+            self.chain = new_chain
+            return True
+        
+        return False
+
+            
     @staticmethod
     def hash(block):
         block_string = json.dumps(block, sort_keys=True).encode()

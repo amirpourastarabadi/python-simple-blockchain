@@ -16,9 +16,9 @@ def mine():
     if len(blockchain.current_transactions) != 0:
         blockchain.new_transaction(0, node_identifier, 50)
         blockchain.full_mempool()
-        nonce, previus_hash = blockchain.mine()
+        nonce, previous_hash = blockchain.mine()
 
-        blockchain.new_block(previus_hash=previus_hash)
+        blockchain.new_block(previous_hash=previous_hash)
 
         return jsonify({
             'message': 'block mined',
@@ -57,7 +57,15 @@ def node_register():
 
 @app.route('/node/resolve')
 def node_resolve():
-    return "it will resolve chain conflict"
+    replaced = blockchain.resolve_conflicts()
+    
+    if replaced:
+        message = 'Our chain was replaced'
+        
+    else:
+        message = 'Our chain is authoritative'
+
+    return jsonify({'message': message,'chain' : blockchain.chain}), 200
 
 
 @app.route('/nodes')
