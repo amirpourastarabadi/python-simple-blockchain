@@ -3,6 +3,7 @@ import json
 from operator import ne
 from time import time
 from urllib.parse import urlparse
+import requests
 
 class BlockChain:
     def __init__(self):
@@ -50,7 +51,8 @@ class BlockChain:
 
         while index < len(chain):
             block = chain[index]
-            
+            print(block['previous_hash'])
+            print(self.hash(last_block))
             if block['previous_hash'] != self.hash(last_block):
                 return False
             
@@ -61,14 +63,14 @@ class BlockChain:
 
     def resolve_conflicts(self):
         new_chain = None
-        max_length = self.chain
+        max_length = len(self.chain)
 
         for node in self.nodes:
             response = requests.get(f"http://{node}/chain")
             if response.status_code == 200:
                 neighbour_chain = response.json()['chain']
                 node_chain_length = len(neighbour_chain)
-
+                print(f'Node{node}')
                 if node_chain_length > max_length and self.validate_chain(neighbour_chain):
                     new_chain = neighbour_chain
                     max_length = node_chain_length
