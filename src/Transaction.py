@@ -3,67 +3,64 @@
 class Transaction:
 
     class Input:
-        def __init__(self, prevHash, index):
+        def __init__(self, prev_hash, index):
             pass
 
-        def addSignature(self, sig):
+        def add_signature(self, sig):
             pass
-
 
     class Output:
 
         def __init__(self,  v,  addr):
             pass
 
-    def Transaction(self, tx=None):
+    def transaction(self, tx=None):
         pass
 
-
-    def  addInput(self, prevTxHash, outputIndex):
+    def add_input(self, prev_tx_hash, output_index):
         pass
 
-    def  addOutput(self, value, address):
+    def add_output(self, value, address):
         pass
 
-    def  removeInput(self, index):
+    def remove_input(self, index):
         pass
 
-    def removeInput(self,  ut):
+    def remove_input(self, ut):
         pass
 
-    def getRawDataToSign(self, index):
+    def get_raw_data_to_sign(self, index):
         pass
 
-    def addSignature(self, signature, index):
+    def add_signature(self, signature, index):
         pass
 
-
-    def getRawTx(self):
+    def get_raw_tx(self):
         pass
 
     def finalize(self):
         pass
 
-    def setHash(self, h):
+    def set_hash(self, h):
         pass
 
-    def getHash(self):
+    def get_hash(self):
         pass
 
-    def getInputs(self):
+    def get_inputs(self):
         pass
 
-    def getOutputs(self):
+    def get_outputs(self):
         pass
 
-    def getInput(self, index):
+    def get_input(self, index):
         pass
 
-    def getOutput(self, index):
+    def get_output(self, index):
         pass
 
-    def numInputs(self ):
+    def num_inputs(self):
         pass
 
-    def numOutputs(self):
+    def num_outputs(self):
         pass

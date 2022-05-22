@@ -3,6 +3,6 @@
 class Crypto:
 
     @staticmethod
-    def verifySignature(pubKey, message, signature):
+    def verify_signature(pub_key, message, signature):
         pass
 
