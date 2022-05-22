@@ -23,10 +23,10 @@ class Transaction:
     def add_output(self, value, address):
         pass
 
-    def remove_input(self, index):
+    def remove_input_by_index(self, index):
         pass
 
-    def remove_input(self, ut):
+    def remove_input_by_UTXO(self, ut):
         pass
 
     def get_raw_data_to_sign(self, index):
