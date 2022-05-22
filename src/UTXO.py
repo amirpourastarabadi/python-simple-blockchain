@@ -1,7 +1,7 @@
 
 class UTXO:
 
-    def __int__(self, tx_hash, index):
+    def __int__(self, transaction_hash, index):
         pass
 
     def get_transaction_hash(self):

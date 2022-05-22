@@ -11,22 +11,22 @@ class Transaction:
 
     class Output:
 
-        def __init__(self,  v,  addr):
+        def __init__(self,  value,  public_key_address):
             pass
 
     def transaction(self, tx=None):
         pass
 
-    def add_input(self, prev_tx_hash, output_index):
+    def add_input(self, prev_transaction_hash, output_index):
         pass
 
-    def add_output(self, value, address):
+    def add_output(self, value, pubic_key_address):
         pass
 
     def remove_input_by_index(self, index):
         pass
 
-    def remove_input_by_UTXO(self, ut):
+    def remove_input_by_UTXO(self, utxo):
         pass
 
     def get_raw_data_to_sign(self, index):
@@ -35,13 +35,13 @@ class Transaction:
     def add_signature(self, signature, index):
         pass
 
-    def get_raw_tx(self):
+    def get_raw_transaction(self):
         pass
 
     def finalize(self):
         pass
 
-    def set_hash(self, h):
+    def set_hash(self, hash):
         pass
 
     def get_hash(self):
@@ -59,8 +59,8 @@ class Transaction:
     def get_output(self, index):
         pass
 
-    def num_inputs(self):
+    def inputs_length(self):
         pass
 
-    def num_outputs(self):
+    def outputs_length(self):
         pass
